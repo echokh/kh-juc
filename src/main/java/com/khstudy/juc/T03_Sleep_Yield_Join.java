@@ -5,29 +5,38 @@ public class T03_Sleep_Yield_Join {
         //sleep
         testSleep();
         //yield
-        testYield();
+//        testYield();
         //join
-        testJoin();
+//        testJoin();
     }
 
     private static void testJoin() {
         Thread t1 = new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("A" + i);
             }
         });
-        t1.start();
         new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
-                if (i == 100) {
+            for (int i = 0; i < 10; i++) {
+                try {
                     try {
-                        t1.join();
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    System.out.println("B" + i);
+                    t1.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }).start();
+        t1.start();
     }
 
 
@@ -36,11 +45,12 @@ public class T03_Sleep_Yield_Join {
             for (int i = 0; i < 10; i++) {
                 try {
                     Thread.currentThread().sleep(500);
+                    System.out.println(Thread.currentThread().getName());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        });
+        }).start();
     }
 
     private static void testYield() {
