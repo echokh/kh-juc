@@ -1,6 +1,7 @@
 package com.khstudy.juc;
 
 import java.io.IOException;
+import java.util.concurrent.locks.LockSupport;
 
 public class T03_Sleep_Yield_Join_wait {
     public static void main(String[] args) throws IOException {
@@ -9,9 +10,9 @@ public class T03_Sleep_Yield_Join_wait {
         //yield
 //        testYield();
         //join
-        testJoin();
+//        testJoin();
         //wait
-//        testWait();
+        testWait();
     }
 
     private static void testWait() throws IOException {
@@ -25,25 +26,25 @@ public class T03_Sleep_Yield_Join_wait {
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }
-            synchronized (lock) {
-                for (int i = 0; i < 1010; i++) {
-                    System.out.println("A" + i);
-                    while (i == 5) {
-                        try {
+            for (int i = 0; i < 1010; i++) {
+                System.out.println("A" + i);
+                while (i == 5) {
+                    try {
+                      LockSupport.park();
+//                        synchronized (lock) {//因为这个锁加在了object上，并没有加在当前线程上所以会报错IllegalMonitorStateException
+                        //使用LockSupport.lock()方法就不会报错
                             Thread.currentThread().wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+//                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
             }
         });
         t1.start();
         new Thread(() -> {
-            synchronized (lock) {
-                for (int i = 0; i < 10; i++) {
-                    System.out.println("B" + i);
-                }
+            for (int i = 0; i < 10; i++) {
+                System.out.println("B" + i);
             }
         }).start();
         //阻塞不能避免报错
@@ -51,7 +52,7 @@ public class T03_Sleep_Yield_Join_wait {
     }
 
     private static void testJoin() {
-        Object lock = new Object();
+//        Object lock = new Object();
         Thread t1 = new Thread(() -> {
             for (int i = 0; i < 10; i++) {
 //                try {
@@ -59,7 +60,7 @@ public class T03_Sleep_Yield_Join_wait {
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }
-                synchronized (lock) {
+                synchronized (T03_Sleep_Yield_Join_wait.class) {
                     System.out.println("A" + i);
                 }
             }
@@ -72,7 +73,7 @@ public class T03_Sleep_Yield_Join_wait {
 //                    } catch (InterruptedException e) {
 //                        e.printStackTrace();
 //                    }
-                    synchronized (lock) {
+                    synchronized (T03_Sleep_Yield_Join_wait.class) {
                         System.out.println("B" + i);
                         if (i == 5) {
                             t1.join();
