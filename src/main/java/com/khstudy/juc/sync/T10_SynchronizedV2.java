@@ -1,4 +1,4 @@
-package com.khstudy.juc;
+package com.khstudy.juc.sync;
 
 public class T10_SynchronizedV2 {
     public synchronized void m1() {

@@ -1,4 +1,4 @@
-package com.khstudy.juc;
+package com.khstudy.juc.exercise;
 //要求用线程顺序打印A1B2C3.....Z26
 public class D01_OrderPrint {
     //TODO

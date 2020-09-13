@@ -1,4 +1,4 @@
-package com.khstudy.juc;
+package com.khstudy.juc.sync;
 
 public class T08_SynchronizedFeature_static {
     private static int count = 10;

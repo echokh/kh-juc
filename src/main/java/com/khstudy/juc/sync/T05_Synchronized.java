@@ -1,4 +1,4 @@
-package com.khstudy.juc;
+package com.khstudy.juc.sync;
 
 public class T05_Synchronized {
     private int count = 10;

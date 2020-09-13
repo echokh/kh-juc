@@ -1,10 +1,10 @@
-package com.khstudy.juc.test;
+package com.khstudy.juc.exercise;
 
 /**
  * 创建一个后台线程，不断地打印hello，之后睡眠100ms，在睡了2s之后，默认主线程应该中断后台线程
  * 此线程在打印出interrupted之后跳出循环
  */
-public class IntSleep {
+public class D03_IntSleep {
     static class myThread extends Thread{
         @Override
         public void run() {
