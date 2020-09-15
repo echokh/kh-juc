@@ -1,7 +1,7 @@
 package com.khstudy.juc.sync;
 
-public class T10_SynchronizedV2 {
-    public synchronized void m1() {
+public class T10_Synchronized_StaticAndNotStatic {
+    public synchronized  static void m1() {
         System.out.println("m1 start..");
         try {
             Thread.currentThread().sleep(10000);
@@ -21,9 +21,12 @@ public class T10_SynchronizedV2 {
     }
 
     public static void main(String[] args) {
-        T10_SynchronizedV2 t = new T10_SynchronizedV2();
+        T10_Synchronized_StaticAndNotStatic t = new T10_Synchronized_StaticAndNotStatic();
         //从输出结果来看，同步方法可以调用非同步方法
-        new Thread(t::m1).start();
+//        new Thread(t::m1).start();
+        new Thread(()->{
+            T10_Synchronized_StaticAndNotStatic.m1();
+        }).start();
         new Thread(t::m2).start();
     }
 
