@@ -1,4 +1,4 @@
-package com.khstudy.juc;
+package com.khstudy.juc.S01_hello_thread;
 
 public class T02_HowToCreateThread {
     private static class T1 extends Thread{

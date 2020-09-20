@@ -1,6 +1,4 @@
-package com.khstudy.juc.testvolatile;
-
-import java.util.concurrent.atomic.AtomicInteger;
+package com.khstudy.juc.S03testvolatile;
 
 /**
  * 通过前面的例子可以看到volatile可以保证可见性，并且禁止指令重排

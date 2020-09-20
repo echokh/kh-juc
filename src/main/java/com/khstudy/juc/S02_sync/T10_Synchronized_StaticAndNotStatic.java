@@ -1,4 +1,4 @@
-package com.khstudy.juc.sync;
+package com.khstudy.juc.S02_sync;
 
 public class T10_Synchronized_StaticAndNotStatic {
     public synchronized  static void m1() {

@@ -1,4 +1,4 @@
-package com.khstudy.juc.sync;
+package com.khstudy.juc.S02_sync;
 
 public class T06_SynchronizedFeature {
     private int count = 10;

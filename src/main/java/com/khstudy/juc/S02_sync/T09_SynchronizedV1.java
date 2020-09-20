@@ -1,4 +1,4 @@
-package com.khstudy.juc.sync;
+package com.khstudy.juc.S02_sync;
 
 public class T09_SynchronizedV1 implements Runnable {
     private volatile int count = 10;

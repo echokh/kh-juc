@@ -1,4 +1,4 @@
-package com.khstudy.juc;
+package com.khstudy.juc.S01_hello_thread;
 
 public class T04_ThreadState {
     public static void main(String[] args) {

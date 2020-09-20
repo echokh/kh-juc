@@ -1,4 +1,4 @@
-package com.khstudy.juc;
+package com.khstudy.juc.S01_hello_thread;
 
 import java.util.concurrent.TimeUnit;
 

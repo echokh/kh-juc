@@ -1,4 +1,4 @@
-package com.khstudy.juc.testvolatile;
+package com.khstudy.juc.S03testvolatile;
 
 /**
  * 写程序证明volatile的可见性

@@ -1,4 +1,4 @@
-package com.khstudy.juc.lock;
+package com.khstudy.juc.S04_newlock.d01_reentrantlock;
 
 import java.util.concurrent.locks.ReentrantLock;
 

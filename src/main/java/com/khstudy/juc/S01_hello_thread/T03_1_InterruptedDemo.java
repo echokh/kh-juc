@@ -1,4 +1,4 @@
-package com.khstudy.juc;
+package com.khstudy.juc.S01_hello_thread;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;

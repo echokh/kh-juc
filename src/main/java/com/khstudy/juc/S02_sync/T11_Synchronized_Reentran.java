@@ -1,4 +1,4 @@
-package com.khstudy.juc.sync;
+package com.khstudy.juc.S02_sync;
 
 /**
  * 一个同步方法调用另外一个同步方法，一个线程已经拥有某个对象的锁，再次申请的时候仍会得到该对象的锁
