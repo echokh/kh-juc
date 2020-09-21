@@ -5,6 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * ReentrantLock是可重入锁，synchronized也是可重入锁,两个都是可重入锁，
  * 有synchronized的地方都可以替换为reentrantLock.lock(),但是synchronized是自动解锁，而ReentrantLock 需要手动解锁
+ * 当 线程 在synchronized发生异常会自动释放，如果不想释放，只要catch住异常就好
  * 测试synchronized可重入
  */
 public class T01_Sycn_Reentrant {
