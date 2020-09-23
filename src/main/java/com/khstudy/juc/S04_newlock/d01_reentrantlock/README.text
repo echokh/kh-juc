@@ -1,0 +1,8 @@
+总结：
+ ReentrantLock 和synchronized都是可重入锁，有synchronized的地方都可以替换为ReentrantLock，synchronized的锁是自动释放的，如果不想释放
+ catch 异常就可以了，而ReentrantLock需要手动释放锁。而ReentrantLock更强大的地方在于可以 使用tryLock()方法尝试获取锁,并不会造成阻塞；也可以
+ 使用lockInterruptibly()获得一个可以被打断的锁；还可以生命锁是公平的还是不公平的。
+
+ 公平锁：谁先来的或者说处在队列前排谁就先获得锁
+ 非公平锁：所有的线程不分队列先后争抢锁
+
