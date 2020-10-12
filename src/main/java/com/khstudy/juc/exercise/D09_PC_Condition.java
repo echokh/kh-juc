@@ -1,44 +1,61 @@
 package com.khstudy.juc.exercise;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 写一个固定容量同步容器，拥有put和get方法，以及getCount方法，能够支持2个生产者线程和10个消费者线程的阻塞调用
+ * 将生产者和消费者分开唤醒
  */
-public class D09_Container_Consumer {
+public class D09_PC_Condition {
     final LinkedList list = new LinkedList<Object>();
     final static int MAX = 10;
     final static int MIN = 0;
 
+    ReentrantLock lock = new ReentrantLock();
+
+    Condition csm = lock.newCondition();
+    Condition pdc = lock.newCondition();
+
     private int count = 0;
 
-    public synchronized void put(Object o) {
-        while (list.size() == MAX) {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public  void put(Object o) {
+
+        try {
+            lock.lock();
+            while (list.size() == MAX) {
+                pdc.await();
             }
+            list.add(new Object());
+            ++count;
+            csm.signalAll();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
         }
-        list.add(new Object());
-        ++count;
-        this.notifyAll();
+
     }
 
-    public synchronized void get() {
-        while (list.size() == MIN) {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public void get() {
+
+        try {
+            lock.lock();
+//                this.wait();
+            while (list.size() == MIN) {
+                csm.await();
             }
+            list.removeFirst();
+            count--;
+            pdc.signalAll();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
         }
-        list.removeFirst();
-        count--;
-        this.notifyAll();
+
     }
 
     public int getCount() {
@@ -47,7 +64,7 @@ public class D09_Container_Consumer {
 
 
     public static void main(String[] args) {
-        D09_Container_Consumer c = new D09_Container_Consumer();
+        D09_PC_Condition c = new D09_PC_Condition();
 
         Thread[] producers = new Thread[2];
         Thread[] consumers = new Thread[10];
