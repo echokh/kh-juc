@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 写一个固定容量同步容器，拥有put和get方法，以及getCount方法，能够支持2个生产者线程和10个消费者线程的阻塞调用
  * 将生产者和消费者分开唤醒
  */
-public class D09_PC_Condition {
+public class D10_PC_Condition {
     final LinkedList list = new LinkedList<Object>();
     final static int MAX = 10;
     final static int MIN = 0;
@@ -64,7 +64,7 @@ public class D09_PC_Condition {
 
 
     public static void main(String[] args) {
-        D09_PC_Condition c = new D09_PC_Condition();
+        D10_PC_Condition c = new D10_PC_Condition();
 
         Thread[] producers = new Thread[2];
         Thread[] consumers = new Thread[10];
